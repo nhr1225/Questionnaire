@@ -31,12 +31,6 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class LoginController {
-	/******************************************************************
-	 * 카카오 로그인
-	 * 1) 카카오 사이트 권한 요청 > code
-	 * 2) 카카오 사용자 토큰 발행 요청 > token
-	 * 3) 카카오 사용자 정보 요청 > 해당 token 사용자 정보 받기
-	 ******************************************************************/
 	@Autowired
 	SqlSession session;
 	//카카오 로그인(Auth)

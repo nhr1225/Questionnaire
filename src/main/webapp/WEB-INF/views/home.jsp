@@ -18,8 +18,10 @@
             console.log("id : " + id);
             if( id == null || id == ""){
             	$(".profile").hide();
+            	$("#myform_nav").prop("disabled", true);
             }else{
             	$(".profile").show();
+            	$("#myform_nav").prop("disabled", false);
             }
         });
         
@@ -46,7 +48,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
                 <li class="act"><a href="/">Home</a></li>
-                <li><a href="/myform">Myform</a></li>
+                <li id="myform_nav"><a href="/myform">Myform</a></li>
                 
               </ul>
               <ul class="nav navbar-nav navbar-right">
