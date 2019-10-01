@@ -1,0 +1,40 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+html, body {margin: 0; padding: 0;}
+.left {float: left;}
+.right {float: right;}
+h1 {padding: 5%; font-family: 'Nanum Pen Script', cursive;}
+h2 {font-family: 'Nanum Pen Script', cursive; font-size: 50px; }
+h3 {font-family: 'Nanum Pen Script', cursive;}
+.margin5 {margin: 10px;}
+section{min-height: 500px;}
+
+table{text-align: center;}
+
+
+.navbar {
+  border-radius: 0;
+}
+
+ .jumbotron {
+  margin-bottom: 0;
+}
+
+footer {
+  background-color: aliceblue;
+  padding: 25px;
+    text-align: center;
+}
+
+.M_image {
+    -moz-transform:scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    
+}
+
+p {font-family: 'Jeju Hallasan', cursive; color: darkseagreen;}
+.V_form:hover{cursor: pointer;}

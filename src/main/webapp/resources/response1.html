@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>설문조사</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/response1.css">
+        <link rel="stylesheet" href="js/response1.js">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn1_plus").click(function(){
+                let items =1;
+                let form_table = "";
+                    form_table =`<table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                           <th style="text-align: center;">질 문</th>
+                                             <th><input class="form-control" type="text" placeholder="질문을 입력하시오"></th>
+                                           <th style="display: table-cell; text-align: center;">
+                                           <button type="button" class="btn1_minus" id="btn1_minus" >
+                                                <span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                           </button></th>
+                                      </tr>
+                                   <tbody>
+                                    <tr>
+                                     <td>옵 션${items++}</td>
+                                     <td><input class="form-control" type="text" placeholder="옵션을 입력하시오"></td>
+                                      <td>
+                                        <button type="button" class="btn2_plus">
+                                            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                      </td>
+                                     </tr>
+                                    </tbody>
+                                </table>`;
+                    $(".option_table").eq(0).append(form_table);
+                
+                    $(".btn2_plus").off().click(function(){
+                      btn2plus(this);
+                    });
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <h2>{<%=제목%></%>}</h2>
+    <section>
+        <form action="response2.html">
+        <div class="option_table">
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                      <th><p style="text-align: center;">{<%=질문%></%>}</p></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                   <div class="radio">
+                      <label><input type="radio" name="optradio">${option 1 } : </label>
+                    </div>
+                  </td>
+                    <td>
+                        <input class="form-control" type="text" value="${옵션}" disabled>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div>
+            <input class="btn btn-primary right" type="submit" value="제 출">
+        </div>
+        </form>
+    </section>
+    <footer class="container-fluid text-center">
+        <div class="margin5"><p>Goodee Academy Copyright.</p> </div>
+    </footer>
+</body>

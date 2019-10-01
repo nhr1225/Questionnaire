@@ -1,0 +1,81 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+html, body {margin: 0; padding: 0;}
+.left {float: left;}
+.right {float: right;}
+h1 {padding: 5%; font-family: 'Nanum Pen Script', cursive; }
+h2{font-family: 'Nanum Pen Script', cursive; font-size: 50px; text-align: center;}
+h3{text-align: center; font-family: 'Nanum Pen Script', cursive; color: darkslategray;}
+.res_section{height: 20vh; background-color: cornflowerblue}
+
+span {font-size: 15px; padding: 5%;}
+
+.res_foot {
+  height: 80vh;
+  background-color: aliceblue;
+    text-align: center;
+}
+.box_sub{
+    background-color: aliceblue;
+    width: 50%;
+    height: 5%;
+    display: block;
+    margin: auto;
+}
+.box_bottom{
+    background-color: black;
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin: auto;
+    box-shadow: 10px 10px 5px grey;
+}
+
+
+p {font-family: 'Jeju Hallasan', cursive; }
+
+.box {
+    border-radius: 30px;
+    margin: auto;
+  width: 50%;
+  height: 50%;
+  background-color: darkturquoise;
+  color: ghostwhite;
+  -webkit-animation: mymove 5s infinite; /* Safari 4.0 - 8.0 */
+  animation: mymove 5s infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+  40% {box-shadow: 10px 17px 25px darkturquoise;}
+}
+
+@keyframes mymove {
+  40% {box-shadow: 10px 17px 25px darkturquoise;}
+}
+
+/*  
+*--------------------------------------------
+* @media query
+*--------------------------------------------
+*/
+
+/*  Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    h2{font-size: 30px;}  
+}
+
+/*  Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    h2{font-size: 40px;}  
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { ... }
+
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+/*  Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { ... }
