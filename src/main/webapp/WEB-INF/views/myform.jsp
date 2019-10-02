@@ -17,9 +17,31 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var id = <%=session.getAttribute("id")%>;
+        
+    /*     if( id == null || id == ""){
+        	$(".profile").hide();
+        	$("#myform_nav").hide();
+        	alert("로그인이 필요합니다.");
+        	location.href="http://gdj16.gudi.kr:20010/";
+        }else{
+        	$(".profile").show();
+        	$("#myform_nav").show();
+        } */
+		
+		
 	   $(".V_form").click(function(){
 	      $("#myModal").modal()
 	    });
+	   
+	   /* random color */
+		var color;
+		color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+		console.log("color : ", color);
+		$("#panel-body").css("background-color", "color");
+		/* document.getElementsByClassName(".panel-body").style.backgroundColor = "lightblue"; */
+	  
+	   
 	});
 </script>
 </head>
@@ -66,38 +88,11 @@
 
 				<div class="col-sm-3 V_form">
 					<div class="panel panel-info">
-						<div class="panel-heading">제목</div>
-						<div class="panel-body">
-							<img src="" class="img-responsive" style="width: 100%" alt="">
+						<div class="panel-heading">title</div>
+						<div class="panel-body" id="panel-body" >
+						
 						</div>
-						<div class="panel-footer">txt</div>
-					</div>
-				</div>
-				<div class="col-sm-3 V_form">
-					<div class="panel panel-info">
-						<div class="panel-heading">제목</div>
-						<div class="panel-body">
-							<img src="" class="img-responsive" style="width: 100%" alt="">
-						</div>
-						<div class="panel-footer">txt</div>
-					</div>
-				</div>
-				<div class="col-sm-3 V_form">
-					<div class="panel panel-info">
-						<div class="panel-heading">제목</div>
-						<div class="panel-body">
-							<img src="" class="img-responsive" style="width: 100%" alt="">
-						</div>
-						<div class="panel-footer">txt</div>
-					</div>
-				</div>
-				<div class="col-sm-3 V_form">
-					<div class="panel panel-info">
-						<div class="panel-heading">제목</div>
-						<div class="panel-body">
-							<img src="" class="img-responsive" style="width: 100%" alt="">
-						</div>
-						<div class="panel-footer">txt</div>
+						<div class="panel-footer">uuid</div>
 					</div>
 				</div>
 
@@ -110,7 +105,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">
-									<p>제 목</p>
+									<p>title</p>
 								</h4>
 							</div>
 							<div class="modal-body">
@@ -118,24 +113,23 @@
 									<table>
 										<thead>
 											<tr>
-												<p>%%질문</p>
+												<p>%%subtitle</p>
 											</tr>
 										</thead>
 										<tbody>
 
 											<td>
 												<div class="radio">
-													<label><input type="radio" name="optradio">%%option 1 
-														: </label>
+													<label><input type="radio" name="optradio"></label>
 												</div>
 											</td>
-											<td><input class="form-control" type="text"
-												value="%%옵션" disabled></td>
+											<td>
+												<input class="form-control" type="text" value="%%옵션">
+											</td>
 										</tbody>
 									</table>
 									<hr>
-									<input class="form-control" type="text" value="%%uuid"
-										disabled>
+									<input class="form-control" type="text" value="%%uuid" disabled>
 								</form>
 							</div>
 						</div>

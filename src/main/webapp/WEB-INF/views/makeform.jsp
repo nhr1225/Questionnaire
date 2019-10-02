@@ -18,7 +18,52 @@
 <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 <script>
 $(document).ready(function(){
+	
+	var id = <%=session.getAttribute("id")%>;
+    
+   /*  if( id == null || id == ""){
+    	$(".profile").hide();
+    	$("#myform_nav").hide();
+    	alert("로그인이 필요합니다.");
+    	location.href="http://gdj16.gudi.kr:20010/";
+    }else{
+    	$(".profile").show();
+    	$("#myform_nav").show();
+    } */
+    
+    $(".btn2_plus").off().click(function(){
+        btn2plus(this);
+          
+          $(".btn2_minus").click(function(){
+          let m_indexs = $(".btn2_minus").index(this);
+          /* console.log("m_Index = ",m_indexs); */
+          if(m_indexs > -1){
+              $("table tbody #sub_option")[m_indexs].remove();
+          }
+        });
+      });
+      
+     
+      
+     function btn2plus(prop){
+  let items=11;
+  let form_option_plus ="";
+        form_option_plus += '<tr id="sub_option">'
+        form_option_plus +=  '<td>옵 션</td>'
+        form_option_plus +=   '<td><input class="form-control"  type="text" placeholder="옵션을 입력하시오"></td>'
+        form_option_plus +=   '<td>' 
+        form_option_plus +=    '<button type="button" class="btn2_minus"><span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span></button>'
+        form_option_plus +=  '</td>'
+        form_option_plus += '</tr>';
+      let index = $(".btn2_plus").index(prop);
+      console.log(index);
+      
+      $("table tbody").eq(index).append(form_option_plus);
+    
+     }
+	<%int i=1;%>
     $("#btn1_plus").click(function(){
+    	
     let items =1;
     let form_table = "";
         form_table += '<table class="table table-striped">'
@@ -31,9 +76,10 @@ $(document).ready(function(){
         form_table +=                            '<span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span>'
         form_table +=                       '</button></th>'
         form_table +=                  '</tr>'
+        form_table += 				'</thead>'
         form_table +=               '<tbody>'
         form_table +=                '<tr>'
-        form_table +=                 '<td>옵 션%%items</td>'
+        form_table +=                 '<td>옵 션</td>'
         form_table +=                 '<td><input class="form-control" type="text" placeholder="옵션을 입력하시오"></td>'
         form_table +=                  '<td>'
         form_table +=                  '<button type="button" class="btn2_plus">'
@@ -47,7 +93,7 @@ $(document).ready(function(){
         
          $(".btn1_minus").click(function(){
             let indexs = $(".btn1_minus").index(this);
-            console.log("Index = ",indexs);
+            /* console.log("Index = ",indexs); */
             var i = indexs+1;
             if(i > 0){
                 document.getElementsByTagName("table")[i].remove();
@@ -60,7 +106,7 @@ $(document).ready(function(){
             
             $(".btn2_minus").click(function(){
             let m_indexs = $(".btn2_minus").index(this);
-            console.log("m_Index = ",m_indexs);
+            /* console.log("m_Index = ",m_indexs); */
             if(m_indexs > -1){
                 $("table tbody #sub_option")[m_indexs].remove();
             }
@@ -81,8 +127,9 @@ $(document).ready(function(){
           form_option_plus += '</tr>';
         let index = $(".btn2_plus").index(prop);
         console.log(index);
+        
         $("table tbody").eq(index).append(form_option_plus);
-    console.log($("table tbody").eq(index));
+    /* console.log($("table tbody").eq(index)); */
 }
     
 });

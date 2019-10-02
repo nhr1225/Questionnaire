@@ -15,13 +15,13 @@
         
         $(document).ready(function(){
         	var id = <%=session.getAttribute("id")%>;
-            console.log("id : " + id);
+            
             if( id == null || id == ""){
             	$(".profile").hide();
-            	$("#myform_nav").prop("disabled", true);
+            	$("#myform_nav").hide();
             }else{
             	$(".profile").show();
-            	$("#myform_nav").prop("disabled", false);
+            	$("#myform_nav").show();
             }
         });
         
@@ -46,10 +46,9 @@
               <a class="navbar-brand">Gudi_Academy</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav .myform_nav">
                 <li class="act"><a href="/">Home</a></li>
-                <li id="myform_nav"><a href="/myform">Myform</a></li>
-                
+                <li ><a href="/myform" id="myform_nav">Myform</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
