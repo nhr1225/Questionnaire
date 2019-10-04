@@ -18,122 +18,205 @@
 <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 <script>
 $(document).ready(function(){
+	var option_num = [1];
+	
+	$("form").submit(function(e){
+		e.preventDefault();
+		var tf = document.getElementsByClassName("textForm");
+		for(var i=0; i<tf.length; i++){
+			if(tf[i].value ==""){
+				alert("제목을 입력하시오");
+				return;
+			} 
+		}
+		$("form")[0].submit();
+	});
 	
 	var id = <%=session.getAttribute("id")%>;
-    
-   /*  if( id == null || id == ""){
-    	$(".profile").hide();
-    	$("#myform_nav").hide();
-    	alert("로그인이 필요합니다.");
-    	location.href="http://gdj16.gudi.kr:20010/";
-    }else{
-    	$(".profile").show();
-    	$("#myform_nav").show();
-    } */
-    
-    $(".btn2_plus").off().click(function(){
-        btn2plus(this);
-          
-          $(".btn2_minus").click(function(){
-          let m_indexs = $(".btn2_minus").index(this);
-          /* console.log("m_Index = ",m_indexs); */
-          if(m_indexs > -1){
-              $("table tbody #sub_option")[m_indexs].remove();
-          }
-        });
-      });
-      
-     
-      
-     function btn2plus(prop){
-  let items=11;
-  let form_option_plus ="";
-        form_option_plus += '<tr id="sub_option">'
-        form_option_plus +=  '<td>옵 션</td>'
-        form_option_plus +=   '<td><input class="form-control"  type="text" placeholder="옵션을 입력하시오"></td>'
-        form_option_plus +=   '<td>' 
-        form_option_plus +=    '<button type="button" class="btn2_minus"><span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span></button>'
-        form_option_plus +=  '</td>'
-        form_option_plus += '</tr>';
-      let index = $(".btn2_plus").index(prop);
-      console.log(index);
-      
-      $("table tbody").eq(index).append(form_option_plus);
-    
-     }
-	<%int i=1;%>
-    $("#btn1_plus").click(function(){
-    	
-    let items =1;
-    let form_table = "";
-        form_table += '<table class="table table-striped">'
-       	form_table +=                '<thead>'
-        form_table +=                  '<tr>'
-        form_table +=                       '<th style="text-align: center;">질 문</th>'
-        form_table +=                         '<th><input class="form-control" type="text" placeholder="질문을 입력하시오"></th>'
-        form_table +=                       '<th style="display: table-cell; text-align: center;">'
-        form_table +=                       '<button type="button" class="btn1_minus" id="btn1_minus" >'
-        form_table +=                            '<span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span>'
-        form_table +=                       '</button></th>'
-        form_table +=                  '</tr>'
-        form_table += 				'</thead>'
-        form_table +=               '<tbody>'
-        form_table +=                '<tr>'
-        form_table +=                 '<td>옵 션</td>'
-        form_table +=                 '<td><input class="form-control" type="text" placeholder="옵션을 입력하시오"></td>'
-        form_table +=                  '<td>'
-        form_table +=                  '<button type="button" class="btn2_plus">'
-        form_table +=                      '<span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>'
-        form_table +=                  '</button>'
-        form_table +=               '</td>'
-        form_table +=            '</tr>'
-        form_table +=         '</tbody>'
-        form_table +=    '</table>';
-        $(".option_table").eq(0).append(form_table);
-        
-         $(".btn1_minus").click(function(){
-            let indexs = $(".btn1_minus").index(this);
-            /* console.log("Index = ",indexs); */
-            var i = indexs+1;
-            if(i > 0){
-                document.getElementsByTagName("table")[i].remove();
-            }
 
-        });
-    
-        $(".btn2_plus").off().click(function(){
-          btn2plus(this);
-            
-            $(".btn2_minus").click(function(){
-            let m_indexs = $(".btn2_minus").index(this);
-            /* console.log("m_Index = ",m_indexs); */
-            if(m_indexs > -1){
-                $("table tbody #sub_option")[m_indexs].remove();
-            }
-          });
-        });
-        
-       
-        
-       function btn2plus(prop){
-    let items=11;
-    let form_option_plus ="";
-          form_option_plus += '<tr id="sub_option">'
-          form_option_plus +=  '<td>옵 션</td>'
-          form_option_plus +=   '<td><input class="form-control"  type="text" placeholder="옵션을 입력하시오"></td>'
-          form_option_plus +=   '<td>' 
-          form_option_plus +=    '<button type="button" class="btn2_minus"><span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span></button>'
-          form_option_plus +=  '</td>'
-          form_option_plus += '</tr>';
-        let index = $(".btn2_plus").index(prop);
-        console.log(index);
-        
-        $("table tbody").eq(index).append(form_option_plus);
-    /* console.log($("table tbody").eq(index)); */
-}
-    
+		/*  if( id == null || id == ""){
+		 	$(".profile").hide();
+		 	$("#myform_nav").hide();
+		 	alert("로그인이 필요합니다.");
+		 	location.href="http://gdj16.gudi.kr:20010/";
+		 }else{
+		 	$(".profile").show();
+		 	$("#myform_nav").show();
+		 } */
+
+		$(".btn2_plus").off().click(function() {
+			btn2plus(this);
+
+			$(".btn2_minus").click(function() {
+				let m_indexs = $(
+						".btn2_minus")
+						.index(
+								this);
+				/* console.log("m_Index = ",m_indexs); */
+				if (m_indexs > -1) {
+					$("table tbody #sub_option")[m_indexs]
+							.remove();
+				}
+			});
+		});
+
+		function btn2plus(prop) {
+
+			let items = 11;
+			let form_option_plus = "";
+			form_option_plus += '<tr id="sub_option">'
+			form_option_plus += '<td>옵 션</td>'
+			form_option_plus += '<td><input class="form-control"  type="text" name="option" placeholder="옵션을 입력하시오"></td>'
+			form_option_plus += '<td>'
+			form_option_plus += '<button type="button" class="btn2_minus"><span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span></button>'
+			form_option_plus += '</td>'
+			form_option_plus += '</tr>';
+			console.log("prop : ", prop);
+			let index = $(".btn2_plus").index(prop);
+
+			console.log("index : ", index);
+
+			option_num[index] += 1;
+
+			/* var num = $("tbody tr").length +1; */
+			if (option_num[index] < 6) {
+				$("table tbody").eq(index).append(
+						form_option_plus);
+			} else {
+				alert("옵션은 5개까지 가능합니다.");
+			}
+
+		}
+
+		$("#btn1_plus").click(function() {
+			let items = 1;
+			let form_table = "";
+			form_table += '<table class="table table-striped">'
+			form_table += '<thead>'
+			form_table += '<tr>'
+			form_table += '<th style="text-align: center;">질 문</th>'
+			form_table += '<th><input class="form-control" name="subtitle" type="text" placeholder="질문을 입력하시오"></th>'
+			form_table += '<th style="display: table-cell; text-align: center;">'
+			form_table += '<button type="button" class="btn1_minus" id="btn1_minus" >'
+			form_table += '<span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span>'
+			form_table += '</button>'
+			form_table += '</th>'
+			form_table += '</tr>'
+			form_table += '</thead>'
+			form_table += '<tbody>'
+			form_table += '<tr>'
+			form_table += '<td>옵 션</td>'
+			form_table += '<td><input class="form-control" name="option" type="text" placeholder="옵션을 입력하시오"></td>'
+			form_table += '<td>'
+			form_table += '<button type="button" class="btn2_plus">'
+			form_table += '<span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>'
+			form_table += '</button>'
+			form_table += '</td>'
+			form_table += '</tr>'
+			form_table += '</tbody>'
+			form_table += '</table>';
+			$(".option_table").eq(0).append(
+					form_table);
+	
+			option_num.push(1);
+			console.log("option_num : ",option_num);
+		$(".btn1_minus").click(function() {
+			let indexs = $(".btn1_minus").index(this);
+			/* console.log("Index = ",indexs); */
+			var i = indexs + 1;
+			if (i > 0) {
+				document
+						.getElementsByTagName("table")[i]
+						.remove();
+			}
+
+		});
+
+		$(".btn2_plus").off().click(function() {
+			btn2plus(this);
+	
+			$(".btn2_minus").click(function() {
+				let m_indexs = $(
+						".btn2_minus")
+						.index(
+								this);
+				/* console.log("m_Index = ",m_indexs); */
+				if (m_indexs > -1) {
+					$("table tbody #sub_option")[m_indexs]
+							.remove();
+				}
+			});
+		});
+
+		function btn2plus(prop) {
+			let items = 11;
+			let form_option_plus = "";
+			form_option_plus += '<tr id="sub_option">'
+			form_option_plus += '<td>옵 션</td>'
+			form_option_plus += '<td><input class="form-control" name="option"  type="text" placeholder="옵션을 입력하시오"></td>'
+			form_option_plus += '<td>'
+			form_option_plus += '<button type="button" class="btn2_minus"><span class="glyphicon glyphicon glyphicon-minus" aria-hidden="true"></span></button>'
+			form_option_plus += '</td>'
+			form_option_plus += '</tr>';
+
+			let index = $(".btn2_plus").index(prop);
+			option_num[index] += 1
+			/* var num = $("tbody tr").length +1; */
+
+			console.log("index : ", index);
+
+			if (option_num[index] < 6) {
+				$("table tbody")
+						.eq(index)
+						.append(
+								form_option_plus);
+			} else {
+				alert("옵션은 5개까지 가능합니다.");
+			}
+
+			/* console.log($("table tbody").eq(index)); */
+		}
+
+	});
+	
+	$("#add").click(function(e) {
+		 e.preventDefault();
+		var title = document.getElementsByName("title")[0].value;
+		var id = document.getElementsByName("id")[0].value;
+		
+		var subtitleList = [];
+		var optionList = [];
+		for (var i = 0; i < option_num.length; i++) {
+			subtitleList.push(document.getElementsByName("subtitle")[i].value);
+			console.log(subtitleList);
+			
+			var options = [];
+			for (var j = 0; j < option_num[i]; j++) {
+				options.push(document.getElementsByName("option")[j].value);
+				console.log(i + " : "+ j);
+			}
+			optionList.push(options);
+		}
+		
+		$.ajax({
+			url : "/insert",
+			data : {
+				title : title,
+				subtitle : subtitleList,
+				option : optionList,
+				id : id,
+			},
+			type : "POST",
+			dataType : "json"
+		}).done(function(json) {
+			location.href = "/myform";
+		}).always(function() {
+			alert("요청이 완료되었습니다!");
+			location.href = "/myform";
+
+		});
+	});
 });
-});  
 </script>
 </head>
 <body>
@@ -175,8 +258,8 @@ $(document).ready(function(){
 		<form class="container text-center">
 			<div class="container-fluid text-center">
 				<h3>Title</h3>
-				<input class="form-control" type="text"
-					style="text-decoration: none;" placeholder="설문지 제목입력란">
+				<input class="form-control textForm" type="text"
+					style="text-decoration: none;" name="title" placeholder="설문지 제목입력란">
 			</div>
 			<hr>
 			<div class="option_table">
@@ -184,8 +267,8 @@ $(document).ready(function(){
 					<thead>
 						<tr>
 							<th style="text-align: center;">질 문</th>
-							<th><input class="form-control" type="text"
-								placeholder="질문을 입력하시오"></th>
+							<th><input class="form-control textForm" type="text"
+								placeholder="질문을 입력하시오" name="subtitle"></th>
 							<th style="display: table-cell; text-align: center;">
 								<button type="button" id="btn1_plus">
 									<span class="glyphicon glyphicon glyphicon-plus"
@@ -197,8 +280,8 @@ $(document).ready(function(){
 					<tbody>
 						<tr>
 							<td>옵 션</td>
-							<td><input class="form-control" type="text"
-								placeholder="옵션을 입력하시오"></td>
+							<td><input class="form-control textForm" type="text"
+								placeholder="옵션을 입력하시오" name="option"></td>
 							<td>
 								<button type="button" class="btn2_plus">
 									<span class="glyphicon glyphicon glyphicon-plus"
@@ -210,9 +293,9 @@ $(document).ready(function(){
 				</table>
 			</div>
 			<div>
-				<a href="/myform" class="btn btn-primary active right" role="button"
-					style="margin-left: 5px;">취소</a> <input type="button"
-					class="btn btn-primary right" value="저장">
+				<a href="/myform" class="btn btn-primary active right" role="button" style="margin-left: 5px;">취소</a> 
+				<input style="text-align: center;" type="hidden" id="id" name="id" class="textForm" value="<%=session.getAttribute("id")%>"> 
+				<input type="button" class="btn btn-primary right" id="add" value="저장">
 			</div>
 		</form>
 	</section>

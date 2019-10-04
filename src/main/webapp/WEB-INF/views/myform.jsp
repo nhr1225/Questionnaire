@@ -1,3 +1,5 @@
+<%@page import="com.java.nhr1225.bean.makeformBean"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +17,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 	$(document).ready(function(){
 		var id = <%=session.getAttribute("id")%>;
@@ -32,6 +35,24 @@
 		
 	   $(".V_form").click(function(){
 	      $("#myModal").modal()
+			var title = document.getElementsByName("title")[0].value;
+			var subtitle = document.getElementsByName("subtitle")[0].value;
+			var option = document.getElementsByName("option")[0].value;
+			console.log("REQ :",no,title,txt);
+			$.ajax({
+			    url: "/myform", 
+			    data: { title : title, subtitle : subtitle, option : option, id : id,}, 
+			    type: "POST",  
+			    dataType: "json"
+			})
+			.done(function(json) {
+			    location.href="/myform";
+			})
+			.always(function() {
+			    alert("요청이 완료되었습니다!");
+			    location.href="/myform";
+
+			});
 	    });
 	   
 	   /* random color */
@@ -43,6 +64,27 @@
 	  
 	   
 	});
+	
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	
+	
+	function drawChart() {
+	  var data = google.visualization.arrayToDataTable([
+		  ['옵션', 'Hours per Day'],
+		  ['Work', 8],
+		  ['Eat', 2],
+		  ['TV', 4],
+		  ['Gym', 2],
+		  ['Sleep', 8]
+	  ]);
+
+	  var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+	  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	  chart.draw(data, options);
+	}
+	</script>
 </script>
 </head>
 <body>
@@ -85,27 +127,47 @@
 	<section>
 		<div class="container text-center">
 			<div class="row">
-
+				<%
+					 List<makeformBean> list = (List<makeformBean>) request.getAttribute("list");
+	                    System.out.println(list);
+							if(list == null){
+								System.out.println("없다");
+							} else {
+								for(int i = 0; i < list.size(); i++){
+					
+				%>
 				<div class="col-sm-3 V_form">
 					<div class="panel panel-info">
-						<div class="panel-heading">title</div>
+					
+						<div class="panel-heading"><%=list.get(i).getTitle()%></div>
 						<div class="panel-body" id="panel-body" >
-						
+						ttt
 						</div>
 						<div class="panel-footer">uuid</div>
 					</div>
 				</div>
-
+				<%
+						}
+					}
+				%>
 				<!-- Modal -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog">
-
+						<%
+							 List<makeformBean> list2 = (List<makeformBean>) request.getAttribute("list");
+			                    System.out.println(list);
+									if(list == null){
+										System.out.println("없다");
+									} else {
+										for(int i = 0; i < list.size(); i++){
+							
+						%>
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">
-									<p>title</p>
+									<p><%=list2.get(i).getTitle()%></p>
 								</h4>
 							</div>
 							<div class="modal-body">
@@ -113,7 +175,7 @@
 									<table>
 										<thead>
 											<tr>
-												<p>%%subtitle</p>
+												<p><%=list.get(i).getSubtitle()%></p>
 											</tr>
 										</thead>
 										<tbody>
@@ -124,7 +186,7 @@
 												</div>
 											</td>
 											<td>
-												<input class="form-control" type="text" value="%%옵션">
+												<input class="form-control" type="text" value="<%=list2.get(i).getOption()%>">
 											</td>
 										</tbody>
 									</table>
@@ -133,12 +195,18 @@
 								</form>
 							</div>
 						</div>
+						<%
+								}
+							}
+						%>
+						<div id="piechart" style="padding: 15px; margin: auto;"></div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 						</div>
+						
 					</div>
-
+					
 				</div>
 			</div>
 		</div>
