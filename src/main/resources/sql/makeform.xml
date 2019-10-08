@@ -5,10 +5,32 @@
 <mapper namespace="makeform">
 
   <select id="select" parameterType="String" resultType="com.java.nhr1225.bean.makeformBean">
- 		select * from makeform where id = ${id}
+ 		select id, title, subtitle, option
+		  from Main_makeform 
+		  join Sub_makeform 
+		    on Main_makeform.titleNO = Sub_makeform.titleNO 
+		  join Option_makeform 
+		    on Sub_makeform.subtitleNO = Option_makeform.subtitleNO
+		 where id = ${id}
+		 GROUP BY title
+  </select>
+  <select id="select_all" parameterType="String" resultType="com.java.nhr1225.bean.makeformBean">
+  		select id, title, subtitle, option
+		  from Main_makeform 
+		  join Sub_makeform 
+		    on Main_makeform.titleNO = Sub_makeform.titleNO 
+		  join Option_makeform 
+		    on Sub_makeform.subtitleNO = Option_makeform.subtitleNO
+		 where title = ${title}
   </select>
   <insert id="insert" parameterType="hashmap">
- 		insert into makeform (id, title, subtitle, option) values (#{id}, #{title}, #{subtitle},#{option})
+ 		insert into Main_makeform (id, title) values (#{id}, #{title})
+  </insert>
+    <insert id="insert_sub" parameterType="hashmap">
+ 		INSERT INTO Sub_makeform (titleNO , subtitle) values (#{titleNO},#{subtitle})
+  </insert>
+    <insert id="insert_option" parameterType="hashmap">
+ 		insert into Option_makeform (option, subtitleNO) values (#{option}, #{subtitleNO})
   </insert>
 
 </mapper>

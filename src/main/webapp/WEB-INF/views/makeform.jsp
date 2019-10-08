@@ -48,15 +48,13 @@ $(document).ready(function(){
 			btn2plus(this);
 
 			$(".btn2_minus").click(function() {
-				let m_indexs = $(
-						".btn2_minus")
-						.index(
-								this);
+				let m_indexs = $(".btn2_minus").index(this);
 				/* console.log("m_Index = ",m_indexs); */
 				if (m_indexs > -1) {
-					$("table tbody #sub_option")[m_indexs]
-							.remove();
+					$("table tbody #sub_option")[m_indexs].remove();
+					
 				}
+				option_num.pop(m_indexs);
 			});
 		});
 
@@ -125,25 +123,19 @@ $(document).ready(function(){
 			/* console.log("Index = ",indexs); */
 			var i = indexs + 1;
 			if (i > 0) {
-				document
-						.getElementsByTagName("table")[i]
-						.remove();
+				document.getElementsByTagName("table")[i].remove();
+				
 			}
-
+			option_num.pop(i);
 		});
 
 		$(".btn2_plus").off().click(function() {
 			btn2plus(this);
 	
 			$(".btn2_minus").click(function() {
-				let m_indexs = $(
-						".btn2_minus")
-						.index(
-								this);
-				/* console.log("m_Index = ",m_indexs); */
+				let m_indexs = $(".btn2_minus").index(this);
 				if (m_indexs > -1) {
-					$("table tbody #sub_option")[m_indexs]
-							.remove();
+					$("table tbody #sub_option")[m_indexs].remove();
 				}
 			});
 		});
@@ -166,10 +158,7 @@ $(document).ready(function(){
 			console.log("index : ", index);
 
 			if (option_num[index] < 6) {
-				$("table tbody")
-						.eq(index)
-						.append(
-								form_option_plus);
+				$("table tbody").eq(index).append(form_option_plus);
 			} else {
 				alert("옵션은 5개까지 가능합니다.");
 			}
@@ -184,30 +173,39 @@ $(document).ready(function(){
 		var title = document.getElementsByName("title")[0].value;
 		var id = document.getElementsByName("id")[0].value;
 		
+		var subtitle_len = document.getElementsByName("subtitle").length;
+		
 		var subtitleList = [];
 		var optionList = [];
-		for (var i = 0; i < option_num.length; i++) {
+		var option_len = 0;
+		for (var i = 0; i < subtitle_len; i++) {
 			subtitleList.push(document.getElementsByName("subtitle")[i].value);
-			console.log(subtitleList);
 			
 			var options = [];
-			for (var j = 0; j < option_num[i]; j++) {
-				options.push(document.getElementsByName("option")[j].value);
-				console.log(i + " : "+ j);
+			option_len = $('.table-striped').children('tbody').eq(i).find('input[type="text"]').length;
+			for (var j = 0; j < option_len; j++) {
+				options.push($('.table-striped').children('tbody').eq(i).find('input[type="text"]').eq(j).val());
 			}
 			optionList.push(options);
 		}
 		
+		
+		 var data =  {
+				"title" : title,
+				"subtitle" : JSON.stringify(subtitleList),
+				"option" : JSON.stringify(optionList),
+				"id" : id
+		}
+		 console.log("data : ",data);
+		 console.log("subtitleList : ",subtitleList);
+		 console.log("optionList : ",optionList);
+		/* var person = JSON.stringify(data);
+		System.out.println(person);  */
+		
 		$.ajax({
 			url : "/insert",
-			data : {
-				title : title,
-				subtitle : subtitleList,
-				option : optionList,
-				id : id,
-			},
+			data : data,
 			type : "POST",
-			dataType : "json"
 		}).done(function(json) {
 			location.href = "/myform";
 		}).always(function() {

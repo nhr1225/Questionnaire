@@ -21,7 +21,10 @@
 <script>
 	$(document).ready(function(){
 		var id = <%=session.getAttribute("id")%>;
-        
+		var title;
+		var subtitle;
+		var option;
+		
     /*     if( id == null || id == ""){
         	$(".profile").hide();
         	$("#myform_nav").hide();
@@ -32,13 +35,14 @@
         	$("#myform_nav").show();
         } */
 		
+        
 		
 	   $(".V_form").click(function(){
 	      $("#myModal").modal()
-			var title = document.getElementsByName("title")[0].value;
-			var subtitle = document.getElementsByName("subtitle")[0].value;
-			var option = document.getElementsByName("option")[0].value;
-			console.log("REQ :",no,title,txt);
+	        title = document.getElementsByClassName("title")[0].innerHTML;
+			subtitle = document.getElementsByName("subtitle")[0].value;
+			option = document.getElementsByName("option")[0].value;
+			
 			$.ajax({
 			    url: "/myform", 
 			    data: { title : title, subtitle : subtitle, option : option, id : id,}, 
@@ -139,7 +143,7 @@
 				<div class="col-sm-3 V_form">
 					<div class="panel panel-info">
 					
-						<div class="panel-heading"><%=list.get(i).getTitle()%></div>
+						<div class="panel-heading title"><%=list.get(i).getTitle()%></div>
 						<div class="panel-body" id="panel-body" >
 						ttt
 						</div>
@@ -154,7 +158,7 @@
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog">
 						<%
-							 List<makeformBean> list2 = (List<makeformBean>) request.getAttribute("list");
+							 List<makeformBean> list1 = (List<makeformBean>) request.getAttribute("list");
 			                    System.out.println(list);
 									if(list == null){
 										System.out.println("없다");
@@ -167,7 +171,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">
-									<p><%=list2.get(i).getTitle()%></p>
+									<p><%=list1.get(i).getTitle()%></p>
 								</h4>
 							</div>
 							<div class="modal-body">
@@ -175,7 +179,7 @@
 									<table>
 										<thead>
 											<tr>
-												<p><%=list.get(i).getSubtitle()%></p>
+												<p><%=list1.get(i).getSubtitle()%></p>
 											</tr>
 										</thead>
 										<tbody>
@@ -186,7 +190,7 @@
 												</div>
 											</td>
 											<td>
-												<input class="form-control" type="text" value="<%=list2.get(i).getOption()%>">
+												<input class="form-control" type="text" value="<%=list1.get(i).getOption()%>">
 											</td>
 										</tbody>
 									</table>
