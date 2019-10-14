@@ -19,9 +19,11 @@
             if( id == null || id == ""){
             	$(".profile").hide();
             	$("#myform_nav").hide();
+            	$("#qna_nav").hide();
             }else{
             	$(".profile").show();
             	$("#myform_nav").show();
+            	$("#qna_nav").show();
             }
         });
         
@@ -49,6 +51,7 @@
               <ul class="nav navbar-nav .myform_nav">
                 <li class="act"><a href="/">Home</a></li>
                 <li ><a href="/myform" id="myform_nav">Myform</a></li>
+                <li><a href="/write" id="qna_nav">Q&A</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>

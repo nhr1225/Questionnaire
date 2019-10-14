@@ -70,7 +70,9 @@ public class makeformBean {
 		this.subtitle = subtitle;
 		this.option = option;
 	}
-	
+	public makeformBean() {
+		
+	}
 	public makeformBean(String id, String title) {
 		this.id = id;
 		this.title = title;

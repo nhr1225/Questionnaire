@@ -15,21 +15,32 @@
 		 GROUP BY title
   </select>
   <select id="select_all" parameterType="String" resultType="com.java.nhr1225.bean.makeformBean">
-  		select id, title, subtitle, option
+  		select *
 		  from Main_makeform 
 		  join Sub_makeform 
 		    on Main_makeform.titleNO = Sub_makeform.titleNO 
 		  join Option_makeform 
 		    on Sub_makeform.subtitleNO = Option_makeform.subtitleNO
-		 where title = ${title}
+		 where titleNO = ${titleNO}
   </select>
-  <insert id="insert" parameterType="hashmap">
+  <select id="select_titleNO"  resultType="Integer">
+  		select max(titleNO) from Main_makeform;
+  </select>
+  <select id="select_subtitleNO" resultType="Integer">
+  		SELECT subtitleNO
+  		  FROM Sub_makeform 
+  		  JOIN Main_makeform 
+   			ON Main_makeform.titleNO = Sub_makeform.titleNO
+ 	     WHERE Main_makeform.titleNO IN (select MAX(titleNO) 
+ 			   FROM Main_makeform)
+  </select>
+  <insert id="insert" parameterType="com.java.nhr1225.bean.makeformBean">
  		insert into Main_makeform (id, title) values (#{id}, #{title})
   </insert>
-    <insert id="insert_sub" parameterType="hashmap">
+    <insert id="insert_sub" parameterType="com.java.nhr1225.bean.makeformBean">
  		INSERT INTO Sub_makeform (titleNO , subtitle) values (#{titleNO},#{subtitle})
   </insert>
-    <insert id="insert_option" parameterType="hashmap">
+    <insert id="insert_option" parameterType="com.java.nhr1225.bean.makeformBean">
  		insert into Option_makeform (option, subtitleNO) values (#{option}, #{subtitleNO})
   </insert>
 

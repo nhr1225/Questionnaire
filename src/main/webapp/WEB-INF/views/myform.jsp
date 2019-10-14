@@ -25,15 +25,17 @@
 		var subtitle;
 		var option;
 		
-    /*     if( id == null || id == ""){
-        	$(".profile").hide();
-        	$("#myform_nav").hide();
-        	alert("로그인이 필요합니다.");
-        	location.href="http://gdj16.gudi.kr:20010/";
-        }else{
-        	$(".profile").show();
-        	$("#myform_nav").show();
-        } */
+	if( id == null || id == ""){
+		$(".profile").hide();
+		$("#myform_nav").hide();
+		$("#qna_nav").hide();
+		alert("로그인이 필요합니다.");
+		location.href="/";
+	}else{
+		$(".profile").show();
+		$("#myform_nav").show();
+		$("#qna_nav").show();
+	}
 		
         
 		
@@ -117,7 +119,7 @@
 				<ul class="nav navbar-nav">
 					<li class="act"><a href="/">Home</a></li>
 					<li><a href="/myform">Myform</a></li>
-
+					<li><a href="/write">Q&A</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -145,7 +147,7 @@
 					
 						<div class="panel-heading title"><%=list.get(i).getTitle()%></div>
 						<div class="panel-body" id="panel-body" >
-						ttt
+						<%=list.get(i).getTitleNO() %>
 						</div>
 						<div class="panel-footer">uuid</div>
 					</div>

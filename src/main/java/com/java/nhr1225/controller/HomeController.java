@@ -35,20 +35,23 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home() {
 		
-		
 		return "home";
 	}
 	
 	@RequestMapping("/myform")
 	public String myform(HttpServletRequest req, Model m, HttpSession hs) {
+//		List<makeformBean> list_all = null;
 		String id = hs.getAttribute("id").toString();
-		String title = req.getParameter("title");
+		
 		System.out.println("id : "+id);
-		System.out.println("title : "+title);
+//		System.out.println("title : "+title);
 	
 		List<makeformBean> list = session.selectList("makeform.select", id);
-//		List<makeformBean> list_all = session.selectList("makeform.select_all", title);
-//		System.out.println(list_all.toString());
+//		for(int i=0; i<list.size(); i++) {
+//			int titleNO = list.get(i).getTitleNO();
+//			list_all = session.selectList("makeform.select_all", titleNO);
+//		}
+//		System.out.println("list_all : "+list_all);
 		
 		req.setAttribute("list", list);
 //		req.setAttribute("list_all", list_all);
@@ -64,27 +67,33 @@ public class HomeController {
 	
 	@PostMapping(value="/insert")
 	public String myform(HttpServletRequest req) {
+		makeformBean mfm =  new makeformBean();
 		try {
 			JSONArray subtitle = JSONArray.fromObject(req.getParameter("subtitle"));
 			JSONArray option = JSONArray.fromObject(req.getParameter("option"));
-			
+			String title = req.getParameter("title");
+			System.out.println("title : "+title);
+			session.insert("makeform.insert", new makeformBean(req.getParameter("id"), req.getParameter("title")));
+			int titleNO = session.selectOne("makeform.select_titleNO");
+			System.out.println("titleNO : "+titleNO);
 			for(int i = 0; i < subtitle.size(); i++) {
 				System.out.println("subtitle : " + subtitle.get(i));
+				System.out.println("subtitle.get(i).toString() " + subtitle.get(i).toString());
+				mfm.makeformBean_sub(titleNO , subtitle.get(i).toString());
+				session.insert("makeform.insert_sub", mfm);
 			}
-			
-			
 			System.out.println(option.toString());
 			System.out.println(option.size());
 			JSONArray option_list;
 			for(int i = 0; i < option.size(); i++) {
 				option_list = (JSONArray) option.get(i);
+				List<Integer> subtitleNO = session.selectList("makeform.select_subtitleNO");
 				for(int j = 0; j < option_list.size(); j++) {
 					System.out.println("option " + i + " : " + option_list.get(j));
+					mfm.makeformBean_option(option_list.get(j).toString(), subtitleNO.get(i));
+					session.insert("makeform.insert_option", mfm);
 				}
-			}
-//			session.insert("makeform.insert", new makeformBean(req.getParameter("id"), req.getParameter("title")));
-//			session.insert("makeform.insert_sub", new makeformBean("" , req.getParameter("subtitleList")));
-//			session.insert("makeform.insert_option", new makeformBean(req.getParameter("optionList"), ""));
+			}	
 
 		} catch (Exception e) {
 			e.printStackTrace();

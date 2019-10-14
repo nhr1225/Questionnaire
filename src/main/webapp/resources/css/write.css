@@ -1,0 +1,70 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+html, body {margin: 0; padding: 0;}
+.left {float: left;}
+.right {float: right;}
+h1 {padding: 5%; font-family: 'Nanum Pen Script', cursive;}
+h2 {font-family: 'Nanum Pen Script', cursive; font-size: 50px; }
+h3 {font-family: 'Nanum Pen Script', cursive;}
+.margin5 {margin: 10px;}
+section{min-height: 500px;}
+
+table{text-align: center;}
+
+
+.navbar {
+  border-radius: 0;
+}
+
+ .jumbotron {
+  margin-bottom: 0;
+}
+
+footer {
+  background-color: aliceblue;
+  padding: 25px;
+    text-align: center;
+}
+
+.M_image {
+    -moz-transform:scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    
+}
+.t1 {margin: auto; height: 80vh;}
+.t2 {background-color: #E6FFFF; width: 70%; margin: auto; height: 70%; border-radius: 10%; clear: both;}
+p {font-family: 'Jeju Hallasan', cursive; color: darkseagreen;}
+.V_form:hover{cursor: pointer;}
+
+
+table {margin: auto; clear: both; border-style: none;}
+table tbody tr{border-style: groove;}
+table tbody tr:hover{background: orange; }
+table th, td {padding: 0 20px; font-size: 18px; border: none; text-align: center;}
+
+/*  Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    h2{font-size: 30px;}  
+    table th, td{font-size: 14px;}
+}
+
+/*  Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    h2{font-size: 40px;}  
+    table th, td{font-size: 16px;}
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+	#piechart {width: 100%;}
+}
+
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+/*  Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { ... }

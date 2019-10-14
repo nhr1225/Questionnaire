@@ -41,7 +41,8 @@ public class LoginController {
 			String url = "https://kauth.kakao.com/oauth/authorize";
 			url += "?client_id=24a9cf2f6258f5b091fcf38880647a8e&redirect_uri=";
 //			url +=URLEncoder.encode("http://localhost:8080/KakaoBack","UTF-8");
-			url += URLEncoder.encode("http://gdj16.gudi.kr:20010/KakaoBack", "UTF-8");
+			url +=URLEncoder.encode("http://nhr.gudi.kr/KakaoBack","UTF-8");
+//			url += URLEncoder.encode("http://gdj16.gudi.kr:20010/KakaoBack", "UTF-8");
 			url += "&response_type=code";
 			url2+=URLEncoder.encode(url, "UTF-8");
 			res.sendRedirect(url2);
@@ -58,23 +59,16 @@ public class LoginController {
 		code = req.getParameter("code");
 		System.out.println(code);
 		try {
-			
 			String url="https://kauth.kakao.com/oauth/token";
 			url +="?client_id=24a9cf2f6258f5b091fcf38880647a8e&redirect_uri="; 
-//			url +=URLEncoder.encode("http://localhost:8080/KakaoBack","UTF-8");
-			url += URLEncoder.encode("http://gdj16.gudi.kr:20010/KakaoBack", "UTF-8");
+			url +=URLEncoder.encode("http://nhr.gudi.kr/KakaoBack","UTF-8");
+//			url += URLEncoder.encode("http://gdj16.gudi.kr:20010/KakaoBack", "UTF-8");
 			url +="&code="+code; 
 			url +="&grant_type=authorization_code";
-			System.out.println(url);
-			
 			HashMap<String, Object> resultMap = HttpUtil.getUrl(url);
-			
 			String userUrl = "https://kapi.kakao.com/v2/user/me";
 			userUrl += "?access_token=" + resultMap.get("access_token");
-			
-			System.out.println(userUrl);
 			resultMap=HttpUtil.getUrl(userUrl);
-			System.out.println(resultMap);
 			JSONObject jObject = JSONObject.fromObject(resultMap);
 			
 			HashMap<String, Object> userResult = new HashMap<String, Object>();
@@ -86,17 +80,11 @@ public class LoginController {
 			userResult.put("profile_image", tmp.get("profile_image"));
 			userResult.put("thumbnail_image", tmp.get("thumbnail_image"));
 			
-			System.out.println("Data : " + userResult.toString());
-			
-			System.out.println(userResult.get("profile_image"));
 			String id=(String) userResult.get("id");
 			String nickname=(String) userResult.get("nickname");
 			String profile_image = (String)userResult.get("profile_image");
 			String thumbnail_image = (String) userResult.get("thumbnail_image");
 			
-			/*
-			 * 0 // 1
-			 * */
 			System.out.println(userResult.get("id"));
 			System.out.println( session.selectOne("login.select", userResult.get("id")).toString() ); // --> 신규가입 일땐 0 
 		
@@ -107,17 +95,6 @@ public class LoginController {
 			} else {
 				System.out.println("기존 접속자 로그인");
 			}
-			//---------------------------------------------------------------
-			/*
-			LoginBean result = session.selectOne("login.selectLogin",userResult.get("id"));
-			
-			if(userResult.get("id").equals(result.getId()))
-				System.out.println("입력x");
-			else {
-				session.insert("login.insert",userResult);
-				System.out.println("데이터 성공 ");
-			}
-			*/
 			LoginBean resultList = session.selectOne("login.selectLogin",userResult.get("id"));
 			req.setAttribute("login", jObject);
 			req.setAttribute("result", resultList);
